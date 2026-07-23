@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.egg-info/
+.casadi_cache/
+build/
+dist/
+*.so
+*.dylib
+dex_ik_solver.c

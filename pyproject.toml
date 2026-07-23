@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dex-ik"
+version = "0.1.0"
+description = "Dual-arm inverse kinematics for the Dex humanoid robot"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = ["robotics", "inverse-kinematics", "humanoid", "pinocchio", "casadi", "ipopt"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "casadi>=3.7,<3.8",
+    "numpy>=1.26",
+]
+# Pinocchio and IPOPT are conda-forge only.
+# Install via: conda env create -f environment.yml
+# Then: python -m pip install --no-deps -e .
+
+[project.urls]
+Homepage = "https://github.com/luckylhf/Dex-IK"
+Repository = "https://github.com/luckylhf/Dex-IK"
+Issues = "https://github.com/luckylhf/Dex-IK/issues"
+
+[project.scripts]
+dex-ik-build-solver = "dex_ik.generate_solver:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dex_ik = [
+    "assets/dex_description/NOTICE",
+    "assets/dex_description/*.txt",
+    "assets/dex_description/urdf/*.urdf",
+    "assets/dex_description/meshes/*.STL",
+]

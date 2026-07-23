@@ -1,0 +1,12 @@
+name: dex-ik
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - numpy>=1.26
+  - casadi>=3.7,<3.8
+  - pinocchio=3.6.0
+  - ipopt=3.14
+  - c-compiler
+  - cxx-compiler
+  - pip
