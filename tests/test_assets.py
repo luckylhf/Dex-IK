@@ -12,6 +12,31 @@ URDF_PATH = DESCRIPTION_ROOT / "urdf" / "dex.urdf"
 
 
 class DexAssetTests(unittest.TestCase):
+    def test_repository_license_scope_is_complete(self):
+        licenses = PROJECT_ROOT / "LICENSES"
+        self.assertTrue((licenses / "Apache-2.0.txt").is_file())
+        self.assertTrue(
+            (licenses / "OpenAtom-Open-Hardware-License-1.0.txt").is_file()
+        )
+        self.assertTrue((licenses / "THIRD_PARTY_NOTICES.md").is_file())
+        scope = (licenses / "README.md").read_text()
+        self.assertIn("src/dex_ik/", scope)
+        self.assertIn("src/dex_ik/assets/dex_description/urdf/", scope)
+        self.assertIn("src/dex_ik/assets/dex_description/meshes/", scope)
+        metadata = (PROJECT_ROOT / "pyproject.toml").read_text()
+        self.assertIn(
+            'license = "Apache-2.0 AND LicenseRef-OpenAtom-OHL-1.0"',
+            metadata,
+        )
+        self.assertIn('license-files = ["LICENSES/*"]', metadata)
+
+    def test_native_validation_workflow_is_documented(self):
+        script = PROJECT_ROOT / "scripts" / "validate_native.py"
+        guide = PROJECT_ROOT / "UBUNTU_MACOS_VALIDATION.md"
+        self.assertTrue(script.is_file())
+        self.assertTrue(guide.is_file())
+        self.assertIn("scripts/validate_native.py", guide.read_text())
+
     def test_urdf_uses_dex_names(self):
         root = ElementTree.parse(URDF_PATH).getroot()
         self.assertEqual(root.attrib["name"], "dex")

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/luckylhf/Dex-IK/actions/workflows/ci.yml/badge.svg)](https://github.com/luckylhf/Dex-IK/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0%20%2B%20OpenAtom%20OHL%201.0-green)](LICENSES/README.md)
 [![Pinocchio](https://img.shields.io/badge/Pinocchio-3.6.0-orange)](https://github.com/stack-of-tasks/pinocchio)
 
 Dex 双臂逆运动学求解器，使用 Pinocchio 建模、CasADi 自动微分和 IPOPT
@@ -151,6 +151,15 @@ DEX_IK_TEST_SHARED_LIBRARY=1 \
 PYTHONPATH=src python -m unittest tests.test_solver -v
 ```
 
+也可以一键验证三个回归姿态的 Python IK、原生库生成与原生 IK：
+
+```bash
+python scripts/validate_native.py
+```
+
+Ubuntu 与 macOS 的完整验收步骤见
+[`UBUNTU_MACOS_VALIDATION.md`](UBUNTU_MACOS_VALIDATION.md)。
+
 ## 项目结构
 
 ```text
@@ -158,7 +167,9 @@ src/dex_ik/solver.py                       IK 实现
 src/dex_ik/generate_solver.py              动态库生成入口
 src/dex_ik/assets/dex_description/         Dex URDF 与 Mesh
 examples/solve_dual_arm.py                 双臂示例
+scripts/validate_native.py                 Python 与原生库一键验收
 tests/                                     回归测试
+LICENSES/                                  许可证文本与适用范围
 environment.yml                            conda-forge 环境
 ```
 
@@ -169,8 +180,10 @@ Dex 模型派生自
 固定到上游提交 `5c221783fb92fcc4af891ef1dc0502963caf2266`。重命名和删减说明见
 [`NOTICE`](NOTICE)。
 
-- IK 代码：Apache License 2.0，见 [`LICENSE`](LICENSE)。
+- IK 代码：Apache License 2.0，见
+  [`LICENSES/Apache-2.0.txt`](LICENSES/Apache-2.0.txt)。
 - 派生 URDF 与 Mesh：OpenAtom Open Hardware License 1.0，见
-  [`THIRD_PARTY_LICENSES/OpenAtom-Open-Hardware-License-1.0.txt`](THIRD_PARTY_LICENSES/OpenAtom-Open-Hardware-License-1.0.txt)。
+  [`LICENSES/OpenAtom-Open-Hardware-License-1.0.txt`](LICENSES/OpenAtom-Open-Hardware-License-1.0.txt)。
+- 完整许可证范围见 [`LICENSES/README.md`](LICENSES/README.md)。
 
 求解器不执行自碰撞或环境碰撞检测。
